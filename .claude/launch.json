@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "tyreos-landing",
-      "runtimeExecutable": "npx",
-      "runtimeArgs": ["serve", "-l", "4173", "."],
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "4173", "--directory", "."],
       "port": 4173
     }
   ]
