@@ -328,3 +328,34 @@ a { color: inherit; text-decoration: none; }
 .feature-grid--channels {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
+
+.process { padding-block: var(--section-pad); border-bottom: 1px solid rgba(245, 245, 247, 0.08); }
+.process__steps {
+  list-style: none;
+  margin: 56px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+.process__step {
+  border-top: 2px solid var(--accent);
+  padding-top: 20px;
+}
+.process__num {
+  display: block;
+  font-family: var(--mono);
+  color: var(--accent);
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+}
+.process__step h3 {
+  font-size: 1.1rem;
+  text-transform: none;
+  letter-spacing: 0;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 860px) {
+  .process__steps { grid-template-columns: 1fr; }
+}
