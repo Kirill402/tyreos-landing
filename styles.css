@@ -319,3 +319,12 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: 0;
   margin: 20px 0 12px;
 }
+
+.icon--whatsapp { color: #25D366; }
+.icon--messenger { color: #4FA6FF; }
+.icon--instagram { color: #E1306C; }
+.icon--email { color: var(--accent); }
+
+.feature-grid--channels {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
