@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
   const header = document.querySelector('.site-header');
   const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 40);
   onScroll();
