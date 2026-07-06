@@ -147,7 +147,9 @@ function openChat() {
       const typing = showTyping();
       setTimeout(() => {
         typing.remove();
-        appendMsg('bot', 'Привет! Я AI-администратор TYREOS 👋\nПомогу записаться на шиномонтаж, подобрать услугу или ответить на вопросы.\n\nС чего начнём?');
+        appendMsg('bot', window.__i18n
+          ? window.__i18n.t('chat.greeting')
+          : 'Привет! Я AI-администратор TYREOS 👋\nПомогу записаться на шиномонтаж, подобрать услугу или ответить на вопросы.\n\nС чего начнём?');
       }, 900);
     }, 300);
   }
