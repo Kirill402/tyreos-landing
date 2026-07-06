@@ -30,12 +30,18 @@ export function createSupabaseRepo(sb: SupabaseClient): BookingRepo {
     },
 
     async upsertClientByPhone(name: string, phone: string): Promise<string> {
+      // Fast path: return an existing client by phone (preserves their stored name/notes).
       const { data: existing, error: selErr } = await sb.from('clients').select('id').eq('phone', phone).maybeSingle();
       if (selErr) throw selErr;
       if (existing) return (existing as any).id;
-      const { data, error } = await sb.from('clients').insert({ name, phone }).select('id').single();
-      if (error) throw error;
-      return (data as any).id;
+      // Insert a new client. If a concurrent request inserted the same phone between our
+      // select and this insert, the clients_phone_key unique index rejects it — recover by
+      // re-selecting the now-existing row instead of failing the booking (TOCTOU-safe).
+      const { data: inserted, error: insErr } = await sb.from('clients').insert({ name, phone }).select('id').maybeSingle();
+      if (inserted) return (inserted as any).id;
+      const { data: raced, error: raceErr } = await sb.from('clients').select('id').eq('phone', phone).maybeSingle();
+      if (raced) return (raced as any).id;
+      throw insErr ?? raceErr ?? new Error('client_upsert_failed');
     },
 
     async createBooking(input): Promise<string> {
