@@ -231,6 +231,43 @@
     </section>
   </main>
 
+  <!-- AI Chat Widget -->
+  <button class="chat-fab" id="chat-fab" aria-label="Открыть AI-чат" aria-expanded="false" aria-controls="chat-panel">
+    <svg class="chat-fab__icon chat-fab__icon--chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M4 5.5h16a1 1 0 0 1 1 1V16a1 1 0 0 1-1 1H10l-4.5 4V17H4a1 1 0 0 1-1-1V6.5a1 1 0 0 1 1-1Z"/>
+      <path d="M12 8.2 12.9 10l1.8.9-1.8.9-.9 1.8-.9-1.8L9.3 10l1.8-.9.9-1.8Z" fill="currentColor" stroke="none"/>
+    </svg>
+    <svg class="chat-fab__icon chat-fab__icon--close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+      <path d="M18 6 6 18M6 6l12 12"/>
+    </svg>
+  </button>
+
+  <div class="chat-panel" id="chat-panel" role="dialog" aria-label="AI-администратор TYREOS" aria-hidden="true">
+    <div class="chat-panel__head">
+      <div class="chat-panel__avatar" aria-hidden="true">AI</div>
+      <div class="chat-panel__info">
+        <div class="chat-panel__name">TYREOS Admin</div>
+        <div class="chat-panel__status">Онлайн 24/7</div>
+      </div>
+    </div>
+    <div class="chat-messages" id="chat-messages" role="log" aria-live="polite" aria-label="История чата"></div>
+    <div class="chat-panel__input-row">
+      <textarea
+        id="chat-input"
+        class="chat-input"
+        rows="1"
+        placeholder="Напишите сообщение..."
+        aria-label="Сообщение"
+        maxlength="500"
+      ></textarea>
+      <button class="chat-send" id="chat-send" aria-label="Отправить" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M22 2 11 13"/><path d="M22 2 15 22 11 13 2 9l20-7Z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
   <footer class="site-footer">
     <div class="container site-footer__row">
       <a class="logo" href="#top">TYREOS</a>
@@ -247,5 +284,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="script.js"></script>
+  <script type="module" src="chat.js"></script>
 </body>
 </html>
