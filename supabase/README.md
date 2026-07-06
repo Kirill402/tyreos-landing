@@ -31,3 +31,19 @@ node --test supabase/functions/_shared/*.test.ts
 
 The anon URL and key are public and belong in the frontend `config.js` (added in Phase 2).
 The service-role key and `LLM_API_KEY` are secret — never commit them.
+
+## Deploy the ai-chat Edge Function (Phase 2)
+
+1. Ensure secrets are set (once):
+   `supabase secrets set LLM_API_KEY=<deepseek-key> LLM_BASE_URL=https://api.deepseek.com LLM_MODEL=deepseek-chat`
+   (`SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` are injected automatically.)
+2. Deploy: `supabase functions deploy ai-chat`
+3. Smoke test (replace <PROJECT_REF> and <ANON_KEY>):
+   ```bash
+   curl -i -X POST "https://<PROJECT_REF>.functions.supabase.co/ai-chat" \
+     -H "Authorization: Bearer <ANON_KEY>" \
+     -H "Content-Type: application/json" \
+     -d '{"sessionId":"smoke-1","messages":[{"role":"user","content":"Привет! Какие есть услуги?"}]}'
+   ```
+   Expected: HTTP 200 with `{"reply":"...","bookingId":null}` where reply lists services (the model called list_services).
+4. Booking test: continue the conversation asking to book a specific service/date/time and confirm a row appears in `bookings` with `source = 'ai_chat'`.
