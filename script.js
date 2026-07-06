@@ -21,7 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && nav.classList.contains('is-open')) closeNav();
+    if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+      closeNav();
+      navToggle.focus();
+    }
   });
 
   document.addEventListener('click', (e) => {
@@ -34,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if (!prefersReducedMotion && typeof gsap !== 'undefined') {
+  if (!prefersReducedMotion && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
 
     document.querySelectorAll('.reveal').forEach((el) => {
