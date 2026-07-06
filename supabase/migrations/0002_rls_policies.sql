@@ -9,6 +9,9 @@
 alter table services enable row level security;
 alter table clients enable row level security;
 alter table bookings enable row level security;
+-- ai_usage: RLS enabled with NO policy below. This is a deliberate deny-all for
+-- anon/authenticated (RLS on + no permissive policy = default deny); service_role
+-- still bypasses RLS. Do not "fix" the missing policy — the absence is intentional.
 alter table ai_usage enable row level security;
 
 create policy "public read services" on services
